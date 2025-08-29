@@ -2,85 +2,99 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <title>กำลังพาไปตะกร้าและหน้าสั่งซื้อ…</title>
+  <title>กำลังพาไป TikTok…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- ถ้าผู้ใช้ปิด JavaScript ให้พาไปหน้าสั่งซื้อโดยตรง -->
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '127978927946856'); // ใส่ Pixel ID ของคุณ
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+  </script>
   <noscript>
-    <meta http-equiv="refresh" content="0;url=https://tuowzz.github.io/github.io/">
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=127978927946856&ev=PageView&noscript=1"/>
   </noscript>
+
+  <!-- TikTok Pixel -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t;
+      var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie"];
+      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } };
+      for (var i = 0; i < ttq.methods.length; i++) { ttq.setAndDefer(ttq, ttq.methods[i]) }
+      ttq.instance = function (t) { for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) { ttq.setAndDefer(e, ttq.methods[n]) } return e };
+      ttq.load = function (e, n) {
+        var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i = ttq._i || {};
+        ttq._i[e] = [];
+        ttq._i[e]._u = i;
+        ttq._t = ttq._t || {};
+        ttq._t[e] = +new Date;
+        ttq._o = ttq._o || {};
+        ttq._o[e] = n || {};
+        var o = document.createElement("script");
+        o.type = "text/javascript";
+        o.async = !0;
+        o.src = i + "?sdkid=" + e + "&lib=" + t;
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(o, a)
+      };
+      ttq.load('D0EVS2JC77U9C23772EG'); // ใส่ TikTok Pixel ID ของคุณ
+      ttq.page();
+      ttq.track('ViewContent');
+    }(window, document, 'ttq');
+  </script>
+
+  <!-- Google Ads Pixel -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17035064059"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17035064059');
+    gtag('event', 'view_item', { value: 1.00, currency: 'THB' });
+  </script>
+
   <style>
-    html,body{height:100%}
-    body{margin:0;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#333;background:#fafafa}
-    .wrap{text-align:center;padding:28px}
-    .title{font-weight:700;font-size:1.1rem}
-    .desc{font-size:.95rem;color:#666;margin-top:6px}
-    .btn{display:inline-block;margin-top:16px;padding:12px 18px;border-radius:10px;background:#000;color:#fff;text-decoration:none;font-weight:700}
-    .hint{font-size:.88rem;color:#888;margin-top:8px}
+    body {font-family: system-ui, sans-serif; display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafafa;}
+    .wrap {text-align:center;}
+    .btn {display:inline-block;margin-top:20px;padding:12px 20px;background:#000;color:#fff;font-weight:bold;border-radius:8px;text-decoration:none;}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="title">กำลังพาไปตะกร้า TikTok และหน้าสั่งซื้อ…</div>
-    <div class="desc">หากเบราว์เซอร์บล็อกการเปิดหน้าต่างอัตโนมัติ ให้กดปุ่มด้านล่าง</div>
-    <a id="openBtn" class="btn" href="#" rel="noopener">เปิดตะกร้า TikTok</a>
-    <div class="hint">ระบบจะพาคุณไปหน้าเว็บสั่งซื้ออัตโนมัติ</div>
+    <h2>กำลังพาไป TikTok…</h2>
+    <p>หากไม่ได้เปิดอัตโนมัติ กดปุ่มด้านล่าง</p>
+    <a id="fallbackBtn" class="btn" href="https://vt.tiktok.com/ZSSH9A3F7">เปิด TikTok</a>
   </div>
 
-<script>
-(function(){
-  // ===== ปลายทาง =====
-  var TIKTOK_URL = "https://vt.tiktok.com/ZSSH9A3F7";
-  var SALES_URL  = "https://tuowzz.github.io/github.io/";
+  <script>
+    // Deep Link + fallback
+    var deepLink = "tiktok://webview?url=https://vt.tiktok.com/ZSSH9A3F7";
+    var fallback = "https://vt.tiktok.com/ZSSH9A3F7";
 
-  // ===== คีย์พารามิเตอร์ที่ต้องการเก็บ =====
-  var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","fbclid","ttclid"];
+    // ยิง Event ว่าจะพาไปซื้อ
+    if(window.fbq) fbq('track', 'InitiateCheckout');
+    if(window.ttq) ttq.track('InitiateCheckout');
+    if(window.gtag) gtag('event', 'begin_checkout', { value: 1.00, currency: 'THB' });
 
-  // ===== ดึงค่าจาก URL คลิกแรก =====
-  var qs = new URLSearchParams(location.search);
-  var data = {};
-  KEYS.forEach(function(k){ var v = qs.get(k); if (v) data[k] = v; });
-  data.referrer = document.referrer || "";
+    // พยายามเปิดแอป TikTok
+    window.location = deepLink;
 
-  // ===== เก็บเป็น Cookie (7 วัน) บนโดเมนเรา =====
-  var expires = new Date(Date.now()+7*24*60*60*1000).toUTCString();
-  Object.keys(data).forEach(function(k){
-    document.cookie = encodeURIComponent(k)+"="+encodeURIComponent(data[k])
-      + "; expires="+expires+"; path=/; samesite=lax";
-  });
-
-  // ===== เก็บสำรองใน localStorage (อ่านง่ายในหน้าสั่งซื้อ) =====
-  try { localStorage.setItem("mb_attr", JSON.stringify({ ...data, ts: Date.now() })); } catch(e){}
-
-  // ===== แนบ params กลับไปทั้งสองปลายทาง (กันกรณี cross-domain) =====
-  function withParams(url){
-    var p = new URLSearchParams();
-    Object.keys(data).forEach(function(k){ if (data[k]) p.set(k, data[k]); });
-    if (!p.toString()) return url;
-    return url + (url.includes("?") ? "&" : "?") + p.toString();
-  }
-  var tikTokFinal = withParams(TIKTOK_URL);
-  var salesFinal  = withParams(SALES_URL);
-
-  // ===== เปิด TikTok ในแท็บใหม่ (ให้ TikTok ตั้งคุกกี้/อ่านพารามิเตอร์ของตัวเอง) แล้วพาแท็บเดิมไปหน้าเว็บสั่งซื้อ =====
-  function goFlow(){
-    // อาจถูกบล็อกถ้าไม่มี user gesture
-    var win = window.open(tikTokFinal, "_blank", "noopener");
-    // เปลี่ยนแท็บปัจจุบันไปยังหน้าเว็บสั่งซื้อ (ดีเลย์เล็กน้อยให้เบราว์เซอร์จัดการ UI)
-    setTimeout(function(){ location.replace(salesFinal); }, 300);
-    return !!win;
-  }
-
-  // พยายามทำงานอัตโนมัติ
-  var opened = goFlow();
-
-  // Fallback: ถ้าโดนบล็อก popup ให้ผู้ใช้กดปุ่ม
-  var btn = document.getElementById("openBtn");
-  btn.href = tikTokFinal;
-  btn.addEventListener("click", function(e){
-    e.preventDefault();
-    goFlow();
-  });
-})();
-</script>
+    // ถ้าไม่ได้ผล → fallback หลัง 1 วิ
+    setTimeout(function(){
+      window.location = fallback;
+    }, 1000);
+  </script>
 </body>
 </html>
