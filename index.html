@@ -2,101 +2,141 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <title>กำลังพาไปแอป TikTok…</title>
+  <title>กำลังเปิด TikTok…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- ถ้าเบราว์เซอร์ปิด JS ให้พาไปหน้าเว็บตะกร้าโดยตรง -->
-  <noscript><meta http-equiv="refresh" content="0;url=https://vt.tiktok.com/ZSSH9A3F7"></noscript>
   <style>
     html,body{height:100%}
-    body{margin:0;display:flex;align-items:center;justify-content:center;background:#fafafa;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#222}
-    .wrap{text-align:center;padding:24px}
-    .title{font-weight:800}
-    .desc{color:#666;margin-top:6px}
+    body{margin:0;display:flex;align-items:center;justify-content:center;background:#fafafa;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#333;text-align:center}
+    .wrap{max-width:360px;padding:24px}
+    .title{font-size:1.2rem;font-weight:800}
+    .desc{color:#666;margin-top:8px}
+    .btn{display:inline-block;margin-top:16px;padding:12px 16px;border-radius:10px;background:#000;color:#fff;text-decoration:none;font-weight:700}
   </style>
+
+  <!-- ========== Facebook Pixel ========== -->
+  <script>
+    (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','127978927946856');
+    fbq('track','PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=127978927946856&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <!-- ========== TikTok Pixel ========== -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie"];
+      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat([].slice.call(arguments,0))) } };
+      for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+      ttq.load = function (e, n) { var i="https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i = ttq._i || {}; ttq._i[e] = []; ttq._i[e]._u = i; ttq._t = ttq._t || {};
+        ttq._t[e] = +new Date; ttq._o = ttq._o || {}; ttq._o[e] = n || {};
+        var o = d.createElement("script"); o.type="text/javascript"; o.async=!0; o.src=i+"?sdkid="+e+"&lib="+t;
+        var a = d.getElementsByTagName("script")[0]; a.parentNode.insertBefore(o,a);
+      };
+      ttq.load('D0EVS2JC77U9C23772EG');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+
+  <!-- ========== Google Ads (gtag) ========== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17035064059"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config','AW-17035064059');
+  </script>
+
+  <!-- ========== Pinterest Tag ========== -->
+  <script>
+    !function(e){if(!window.pintrk){window.pintrk = function (){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};
+    var n=window.pintrk; n.queue=[], n.version="3.0";
+    var t=document.createElement("script");t.async=!0;t.src=e;
+    var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+    pintrk('load', 'YOUR-PINTEREST-TAG-ID'); /* 👈 แทนที่ด้วย Pinterest Tag ID ของคุณ */
+    pintrk('page');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none;" alt=""
+      src="https://ct.pinterest.com/v3/?event=init&tid=YOUR-PINTEREST-TAG-ID&noscript=1"/>
+  </noscript>
 </head>
 <body>
   <div class="wrap">
-    <div class="title">กำลังเปิดในแอป TikTok…</div>
-    <div class="desc">หากไม่เด้ง ระบบจะพาไปหน้าเว็บโดยอัตโนมัติ</div>
+    <div class="title">กำลังเปิดตะกร้า TikTok…</div>
+    <div class="desc">หากไม่เด้งอัตโนมัติ ระบบจะพาไปหน้าเว็บโดยตรง</div>
+    <a class="btn" href="https://vt.tiktok.com/ZSSH9A3F7">เปิดตะกร้า TikTok</a>
   </div>
 
-<script>
-(function(){
-  // ===== 1) ตั้งค่าลิงก์ตะกร้าหรือหน้าสินค้า TikTok =====
-  var TT_TARGET_WEB = "https://vt.tiktok.com/ZSSH9A3F7"; // <- เปลี่ยนตรงนี้ได้
+  <script>
+    /* ======= ตั้งค่าหลัก (แก้ได้) ======= */
+    var LINK_SHORT   = "https://vt.tiktok.com/ZSSH9A3F7"; // ลิงก์สั้น TikTok ของคุณ
+    var ORDER_VALUE  = 299.00;  // ยอดสั่งซื้อที่ต้องการยิงพิกเซล
+    var CURRENCY     = "THB";
+    var CONTENT_ID   = "MB-CONCEALER"; // รหัสสินค้า
+    var CONTENT_TYPE = "product";
+    var QUANTITY     = 1;
 
-  // สร้าง deep link หลายรูปแบบ
-  var TT_SCHEME_1   = "tiktok://webview?url=" + encodeURIComponent(TT_TARGET_WEB);
-  var TT_SCHEME_2   = "tiktok://open?url="    + encodeURIComponent(TT_TARGET_WEB);
-  var ANDROID_INTENT = "intent://webview?url="+encodeURIComponent(TT_TARGET_WEB)
-                     + "#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;"
-                     + "S.browser_fallback_url="+encodeURIComponent(TT_TARGET_WEB)+";end";
+    /* ======= ยิงอีเวนต์ Purchase/Conversion ครบทุกแพลตฟอร์ม ======= */
+    (function firePurchaseEvents(){
+      try {
+        // Facebook Purchase
+        if (window.fbq) {
+          fbq('track','Purchase',{
+            value: ORDER_VALUE,
+            currency: CURRENCY,
+            contents: [{id: CONTENT_ID, quantity: QUANTITY}],
+            content_type: CONTENT_TYPE
+          });
+        }
+      } catch(e){}
 
-  // ===== 2) ตรวจแพลตฟอร์ม =====
-  var ua = navigator.userAgent || "";
-  var isAndroid = /Android/i.test(ua);
-  var isIOS     = /iPhone|iPad|iPod/i.test(ua);
+      try {
+        // TikTok CompletePayment
+        if (window.ttq) {
+          ttq.track('CompletePayment',{
+            contents:[{content_id: CONTENT_ID, content_type: CONTENT_TYPE, quantity: QUANTITY}],
+            value: ORDER_VALUE,
+            currency: CURRENCY
+          });
+        }
+      } catch(e){}
 
-  // ===== 3) ถ้าแอปเปิดสำเร็จ หน้าปัจจุบันจะถูกซ่อน → ยกเลิก fallback =====
-  var timers = [];
-  function cancelOnHide(){
-    function handler(){
-      if(document.hidden){
-        timers.forEach(function(id){ clearTimeout(id); });
-        document.removeEventListener('visibilitychange', handler);
-      }
-    }
-    document.addEventListener('visibilitychange', handler);
-  }
+      try {
+        // Google Ads Conversion
+        if (window.gtag) {
+          gtag('event','conversion', {
+            'send_to': 'AW-17035064059/53zPCNHE2OIaEPvl-bo_', // 👈 conversion id/label ของคุณ
+            'value': ORDER_VALUE,
+            'currency': CURRENCY
+          });
+        }
+      } catch(e){}
 
-  // ===== 4) ลำดับความพยายาม “อัตโนมัติ” ทันทีที่เปิดหน้า =====
-  function autoOpen(){
-    cancelOnHide();
+      try {
+        // Pinterest Checkout (Purchase)
+        if (window.pintrk) {
+          pintrk('track','checkout', {
+            value: ORDER_VALUE,
+            currency: CURRENCY,
+            order_quantity: QUANTITY,
+            line_items: [{product_name: CONTENT_ID, product_price: ORDER_VALUE, product_quantity: QUANTITY}]
+          });
+        }
+      } catch(e){}
+    })();
 
-    if(isAndroid){
-      // Android: ยิง intent:// ก่อน (มี fallback ในตัวหลายรุ่น)
-      location.href = ANDROID_INTENT;
-
-      // ลองซ้ำด้วย scheme เผื่อบางเครื่องไม่รองรับ intent
-      timers.push(setTimeout(function(){ location.href = TT_SCHEME_1; }, 180));
-      timers.push(setTimeout(function(){ location.href = TT_SCHEME_2; }, 360));
-
-      // สุดท้าย fallback ไปเว็บถ้าไม่สลับแอปภายใน ~1.2s
-      timers.push(setTimeout(function(){ location.href = TT_TARGET_WEB; }, 1200));
-      return;
-    }
-
-    if(isIOS){
-      // iOS: บางเคสต้องยิงหลายวิธีติด ๆ กัน
-      // 1) ยิงผ่าน location.href
-      location.href = TT_SCHEME_1;
-
-      // 2) ยิงผ่าน hidden iframe (หลายเคสเวิร์กกว่า)
-      timers.push(setTimeout(function(){
-        try{
-          var iframe = document.createElement('iframe');
-          iframe.style.display = 'none';
-          iframe.src = TT_SCHEME_2;
-          document.body.appendChild(iframe);
-        }catch(e){}
-      }, 150));
-
-      // 3) ยิงซ้ำอีกครั้งด้วย scheme หลัก
-      timers.push(setTimeout(function(){ location.href = TT_SCHEME_1; }, 300));
-
-      // 4) fallback ไปเว็บถ้าไม่สลับแอปภายใน ~1.2s
-      timers.push(setTimeout(function(){ location.href = TT_TARGET_WEB; }, 1200));
-      return;
-    }
-
-    // Desktop/อื่น ๆ → ไปเว็บ
-    location.href = TT_TARGET_WEB;
-  }
-
-  // เริ่มทำงานอัตโนมัติทันที
-  // ใช้ setTimeout สั้น ๆ เพื่อให้ DOM พร้อมและบางเบราว์เซอร์ยอม redirect
-  setTimeout(autoOpen, 50);
-})();
-</script>
+    /* ======= หน่วงสั้น ๆ ให้พิกเซลรับ event แล้วรีไดเรกต์ไปลิงก์สั้น ======= */
+    setTimeout(function(){
+      window.location.href = LINK_SHORT;
+    }, 600); // 0.6 วินาที (ปรับได้ 400–800ms)
+  </script>
 </body>
 </html>
