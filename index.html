@@ -4,61 +4,79 @@
   <meta charset="utf-8">
   <title>กำลังพาไปหน้าสินค้า…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- ถ้าผู้ใช้ปิด JavaScript ให้พาไปหน้าขายทันที (จะไม่ได้เก็บคุกกี้) -->
+  <!-- ถ้าปิด JS ให้พาไปหน้าเว็บขายโดยตรง (จะไม่ได้เก็บพารามิเตอร์/คุกกี้) -->
   <noscript>
     <meta http-equiv="refresh" content="0;url=https://tuowzz.github.io/github.io/">
   </noscript>
   <style>
-    body { font-family: system-ui, -apple-system, "Kanit", Segoe UI, Roboto, Arial, sans-serif; margin:0; display:flex; align-items:center; justify-content:center; min-height:100vh; }
-    .box { text-align:center; padding:24px; color:#444; }
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#444}
+    .box{text-align:center;padding:24px}
+    .btn{display:inline-block;margin-top:14px;padding:12px 18px;border-radius:10px;background:#000;color:#fff;text-decoration:none;font-weight:700}
+    .hint{font-size:.9rem;color:#777;margin-top:8px}
   </style>
 </head>
 <body>
   <div class="box">
-    กำลังพาไปหน้าสินค้า…
+    <div>กำลังพาไปตะกร้า TikTok และหน้าเว็บสินค้า…</div>
+    <a id="openBtn" class="btn" href="#" rel="noopener">เปิดตะกร้า TikTok</a>
+    <div class="hint">ถ้าเบราเซอร์บล็อกการเปิดหน้าต่างอัตโนมัติ ให้กดปุ่มด้านบน</div>
   </div>
 
 <script>
-(function() {
-  // ====== ปลายทาง (หน้าเว็บขายของ) ======
-  var DEST_URL = "https://tuowzz.github.io/github.io/";  // <-- ใช้ลิงก์ที่คุณให้มา
+(function(){
+  // ====== ปลายทางทั้งสอง ======
+  var TIKTOK_URL = "https://vt.tiktok.com/ZSSH9A3F7";
+  var SALES_URL  = "https://tuowzz.github.io/github.io/";
 
-  // ====== พารามิเตอร์ที่ต้องการเก็บ ======
+  // ====== คีย์พารามิเตอร์ที่ต้องการเก็บ ======
   var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","fbclid","ttclid"];
 
+  // ====== ดึงค่าจาก URL ======
   var qs = new URLSearchParams(location.search);
   var data = {};
-
-  // เก็บค่าจาก URL (ถ้ามี)
-  KEYS.forEach(function(k){
-    var v = qs.get(k);
-    if (v) data[k] = v;
-  });
-
-  // เก็บ referrer (ไว้เดาว่ามาจากไหน ถ้าไม่มี utm/clid)
+  KEYS.forEach(function(k){ var v = qs.get(k); if (v) data[k] = v; });
   data.referrer = document.referrer || "";
 
-  // ====== เก็บเป็น Cookie first-party (อายุ 7 วัน) ======
-  var expires = new Date(Date.now() + 7*24*60*60*1000).toUTCString();
+  // ====== เก็บ Cookie (7 วัน) ======
+  var expires = new Date(Date.now()+7*24*60*60*1000).toUTCString();
   Object.keys(data).forEach(function(k){
-    document.cookie = encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
-      + "; expires=" + expires + "; path=/; samesite=lax";
+    document.cookie = encodeURIComponent(k)+"="+encodeURIComponent(data[k])+"; expires="+expires+"; path=/; samesite=lax";
   });
 
-  // ====== เก็บซ้ำใน localStorage (กัน ITP/เผื่ออ่านง่ายจากหน้าเป้าหมาย) ======
-  try {
-    localStorage.setItem("mb_attr", JSON.stringify({ ...data, ts: Date.now() }));
-  } catch(e) {}
+  // ====== เก็บ LocalStorage (สะดวกอ่านในหน้าเว็บขาย) ======
+  try { localStorage.setItem("mb_attr", JSON.stringify({ ...data, ts: Date.now() })); } catch(e){}
 
-  // ====== แนบพารามิเตอร์เดิมไปปลายทางด้วย (กันกรณีต่างโดเมนอ่านคุกกี้ไม่ได้) ======
-  var pass = new URLSearchParams();
-  Object.keys(data).forEach(function(k){ if (data[k]) pass.set(k, data[k]); });
+  // ====== แนบพารามิเตอร์เดิมให้ปลายทางทั้งสอง (กันกรณีต่างโดเมนอ่านคุกกี้ไม่ได้) ======
+  function withParams(url) {
+    var p = new URLSearchParams();
+    Object.keys(data).forEach(function(k){ if (data[k]) p.set(k, data[k]); });
+    if (!p.toString()) return url; // ไม่มีพารามิเตอร์
+    return url + (url.includes("?") ? "&" : "?") + p.toString();
+  }
+  var tikTokFinal = withParams(TIKTOK_URL);
+  var salesFinal  = withParams(SALES_URL);
 
-  var finalUrl = DEST_URL + (DEST_URL.includes("?") ? "&" : "?") + pass.toString();
+  // ====== ฟังก์ชันพยายามเปิด TikTok ในแท็บใหม่ แล้วเปลี่ยนแท็บเดิมไปหน้าเว็บขาย ======
+  function goFlow() {
+    // พยายามเปิด TikTok ในแท็บใหม่ (อาจถูกบล็อกถ้าไม่มี user gesture)
+    var win = window.open(tikTokFinal, "_blank", "noopener");
+    // ส่งต่อแท็บปัจจุบันไปหน้าเว็บขาย (ดีเลย์เล็กน้อยให้เบราเซอร์ไม่งง)
+    setTimeout(function(){ location.replace(salesFinal); }, 300);
+    return !!win;
+  }
 
-  // ใช้ replace เพื่อลดปัญหากด Back
-  location.replace(finalUrl);
+  // ====== พยายามทำงานอัตโนมัติทันที ======
+  var opened = goFlow();
+
+  // ====== ถ้าโดนบล็อก pop-up แสดงปุ่มให้ผู้ใช้กด (ถือเป็น user gesture → เปิดได้แน่นอน) ======
+  var btn = document.getElementById("openBtn");
+  btn.addEventListener("click", function(e){
+    e.preventDefault();
+    goFlow();
+  });
+
+  // ปรับ href ให้ปุ่มด้วย (เผื่ออยากกดเปิดเองเฉยๆ)
+  btn.href = tikTokFinal;
 })();
 </script>
 </body>
