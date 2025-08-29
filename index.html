@@ -2,99 +2,133 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <title>กำลังพาไป TikTok…</title>
+  <title>เปิดตะกร้า TikTok</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html,body{height:100%}
+    body{margin:0;display:flex;align-items:center;justify-content:center;background:#fafafa;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#333}
+    .wrap{text-align:center;padding:28px}
+    .title{font-size:1.15rem;font-weight:700}
+    .desc{color:#666;margin-top:8px}
+    .btn{display:inline-block;margin-top:18px;padding:14px 20px;border-radius:12px;background:#000;color:#fff;text-decoration:none;font-weight:800}
+    .hint{font-size:.9rem;color:#888;margin-top:8px}
+  </style>
 
-  <!-- Facebook Pixel -->
+  <!-- Pixels (async, ไม่บล็อกการเปิดแอป) -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '127978927946856'); // ใส่ Pixel ID ของคุณ
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
+    // Facebook Pixel (แก้เป็น Pixel ID ของคุณ)
+    (function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','127978927946856'); fbq('track','PageView'); fbq('track','ViewContent');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=127978927946856&ev=PageView&noscript=1"/>
-  </noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=127978927946856&ev=PageView&noscript=1"/></noscript>
 
-  <!-- TikTok Pixel -->
   <script>
+    // TikTok Pixel (แก้เป็น Pixel ID ของคุณ)
     !function (w, d, t) {
-      w.TiktokAnalyticsObject = t;
-      var ttq = w[t] = w[t] || [];
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || [];
       ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie"];
-      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } };
-      for (var i = 0; i < ttq.methods.length; i++) { ttq.setAndDefer(ttq, ttq.methods[i]) }
-      ttq.instance = function (t) { for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) { ttq.setAndDefer(e, ttq.methods[n]) } return e };
-      ttq.load = function (e, n) {
-        var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
-        ttq._i = ttq._i || {};
-        ttq._i[e] = [];
-        ttq._i[e]._u = i;
-        ttq._t = ttq._t || {};
-        ttq._t[e] = +new Date;
-        ttq._o = ttq._o || {};
-        ttq._o[e] = n || {};
-        var o = document.createElement("script");
-        o.type = "text/javascript";
-        o.async = !0;
-        o.src = i + "?sdkid=" + e + "&lib=" + t;
-        var a = document.getElementsByTagName("script")[0];
-        a.parentNode.insertBefore(o, a)
+      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat([].slice.call(arguments,0))) } };
+      for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+      ttq.load = function (e, n) { var i="https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i = ttq._i || {}; ttq._i[e] = []; ttq._i[e]._u = i; ttq._t = ttq._t || {};
+        ttq._t[e] = +new Date; ttq._o = ttq._o || {}; ttq._o[e] = n || {};
+        var o = d.createElement("script"); o.type="text/javascript"; o.async=!0; o.src=i+"?sdkid="+e+"&lib="+t;
+        var a = d.getElementsByTagName("script")[0]; a.parentNode.insertBefore(o,a);
       };
-      ttq.load('D0EVS2JC77U9C23772EG'); // ใส่ TikTok Pixel ID ของคุณ
-      ttq.page();
-      ttq.track('ViewContent');
+      ttq.load('D0EVS2JC77U9C23772EG'); ttq.page(); ttq.track('ViewContent');
     }(window, document, 'ttq');
   </script>
 
-  <!-- Google Ads Pixel -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17035064059"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-17035064059');
-    gtag('event', 'view_item', { value: 1.00, currency: 'THB' });
+    function gtag(){dataLayer.push(arguments);} gtag('js', new Date());
+    gtag('config', 'AW-17035064059'); gtag('event','view_item',{value:1,currency:'THB'});
   </script>
-
-  <style>
-    body {font-family: system-ui, sans-serif; display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafafa;}
-    .wrap {text-align:center;}
-    .btn {display:inline-block;margin-top:20px;padding:12px 20px;background:#000;color:#fff;font-weight:bold;border-radius:8px;text-decoration:none;}
-  </style>
 </head>
 <body>
   <div class="wrap">
-    <h2>กำลังพาไป TikTok…</h2>
-    <p>หากไม่ได้เปิดอัตโนมัติ กดปุ่มด้านล่าง</p>
-    <a id="fallbackBtn" class="btn" href="https://vt.tiktok.com/ZSSH9A3F7">เปิด TikTok</a>
+    <div class="title">เปิดตะกร้า TikTok</div>
+    <div class="desc">แตะปุ่มด้านล่างเพื่อไปที่แอป TikTok</div>
+    <a id="openBtn" class="btn" href="#">เปิดตะกร้า</a>
+    <div class="hint">ถ้าไม่เด้งอัตโนมัติ เบราว์เซอร์อาจบล็อก ให้กดปุ่มอีกครั้ง</div>
   </div>
 
-  <script>
-    // Deep Link + fallback
-    var deepLink = "tiktok://webview?url=https://vt.tiktok.com/ZSSH9A3F7";
-    var fallback = "https://vt.tiktok.com/ZSSH9A3F7";
+<script>
+(function(){
+  // ===== ตั้งค่าลิงก์ตะกร้า =====
+  var TT_CART_URL = "https://vt.tiktok.com/ZSSH9A3F7";
 
-    // ยิง Event ว่าจะพาไปซื้อ
-    if(window.fbq) fbq('track', 'InitiateCheckout');
-    if(window.ttq) ttq.track('InitiateCheckout');
-    if(window.gtag) gtag('event', 'begin_checkout', { value: 1.00, currency: 'THB' });
+  // ยิง event เริ่มเช็คเอาต์ (ก่อนเปิดแอป)
+  function trackInitiate(){
+    try{ if(window.fbq) fbq('track','InitiateCheckout'); }catch(e){}
+    try{ if(window.ttq) ttq.track('InitiateCheckout'); }catch(e){}
+    try{ if(window.gtag) gtag('event','begin_checkout',{value:1,currency:'THB'}); }catch(e){}
+  }
 
-    // พยายามเปิดแอป TikTok
-    window.location = deepLink;
+  // ตรวจแพลตฟอร์ม
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-    // ถ้าไม่ได้ผล → fallback หลัง 1 วิ
-    setTimeout(function(){
-      window.location = fallback;
-    }, 1000);
-  </script>
+  // สร้างลิงก์ deep link
+  function buildDeepLink(){
+    if(isAndroid){
+      // ใช้ intent:// เพื่อเปิดแอป TikTok โดยตรง (เชื่อถือได้กว่า)
+      var fallback = encodeURIComponent(TT_CART_URL);
+      return "intent://webview?url="+encodeURIComponent(TT_CART_URL)
+           + "#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;"
+           + "S.browser_fallback_url="+fallback+";end";
+    } else if(isIOS){
+      // iOS: ใช้ custom scheme แล้ว fallback เป็นเว็บ
+      return "tiktok://webview?url="+encodeURIComponent(TT_CART_URL);
+    }
+    // desktop หรืออุปกรณ์อื่น ๆ: ใช้เว็บ
+    return TT_CART_URL;
+  }
+
+  // เปิดแอปด้วย user gesture + fallback
+  function openTikTok(){
+    trackInitiate();
+    var deep = buildDeepLink();
+    var fallback = TT_CART_URL;
+    var fallbackTimer;
+
+    // ถ้าเป็น iOS ใช้วิธีเปลี่ยน location → ถ้าไม่มีแอปจะอยู่หน้าเดิม จึงต้อง fallback หลังเวลาหนึ่ง
+    // ถ้าเป็น Android intent:// มักพอแล้ว (มี fallback ในตัว)
+    function go() {
+      // ยกเลิก fallback ถ้าผู้ใช้สลับออกจากหน้านี้ (แปลว่าแอปเปิดแล้ว)
+      var onHide = function(){
+        if (document.hidden) clearTimeout(fallbackTimer);
+      };
+      document.addEventListener('visibilitychange', onHide, { once:true });
+
+      // ตั้ง fallback (เฉพาะ iOS/กรณี custom scheme)
+      if (isIOS) {
+        fallbackTimer = setTimeout(function(){ location.href = fallback; }, 1200);
+      }
+
+      // เปิดด้วย deep link / intent
+      location.href = deep;
+    }
+
+    go();
+  }
+
+  // ปุ่มให้ผู้ใช้กด (user gesture)
+  var btn = document.getElementById('openBtn');
+  btn.addEventListener('click', function(e){ e.preventDefault(); openTikTok(); });
+
+  // พยายาม auto เปิดครั้งแรก (บางเบราว์เซอร์ต้องกดเองถึงจะยอม)
+  setTimeout(function(){
+    // ไม่บังคับ auto—ปล่อยให้ผู้ใช้กดจะเสถียรกว่า
+    // openTikTok();
+  }, 100);
+
+})();
+</script>
 </body>
 </html>
