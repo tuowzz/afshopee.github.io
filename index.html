@@ -2,96 +2,100 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <title>กำลังเปิดตะกร้าในแอป TikTok…</title>
+  <title>กำลังพาไปแอป TikTok…</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ถ้าเบราว์เซอร์ปิด JS ให้พาไปหน้าเว็บตะกร้าโดยตรง -->
+  <noscript><meta http-equiv="refresh" content="0;url=https://vt.tiktok.com/ZSSH9A3F7"></noscript>
   <style>
     html,body{height:100%}
-    body{margin:0;display:flex;align-items:center;justify-content:center;background:#fafafa;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#333}
-    .wrap{text-align:center;padding:28px}
-    .title{font-size:1.18rem;font-weight:800}
-    .desc{color:#666;margin-top:8px}
-    .btn{display:inline-block;margin-top:18px;padding:14px 20px;border-radius:12px;background:#000;color:#fff;text-decoration:none;font-weight:800}
-    .hint{font-size:.9rem;color:#888;margin-top:8px}
+    body{margin:0;display:flex;align-items:center;justify-content:center;background:#fafafa;font-family:system-ui,-apple-system,"Kanit",Segoe UI,Roboto,Arial,sans-serif;color:#222}
+    .wrap{text-align:center;padding:24px}
+    .title{font-weight:800}
+    .desc{color:#666;margin-top:6px}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="title">กำลังพาไปที่แอป TikTok…</div>
-    <div class="desc">ถ้าไม่เด้งอัตโนมัติ ให้กดปุ่มด้านล่าง</div>
-    <a id="openBtn" class="btn" href="#">เปิดตะกร้า TikTok</a>
-    <div class="hint">บางเบราว์เซอร์ (เช่น ในแอปโซเชียล) ต้องแตะปุ่มเพื่ออนุญาตเปิดแอป</div>
+    <div class="title">กำลังเปิดในแอป TikTok…</div>
+    <div class="desc">หากไม่เด้ง ระบบจะพาไปหน้าเว็บโดยอัตโนมัติ</div>
   </div>
 
 <script>
 (function(){
-  // ===== ตั้งค่าลิงก์ตะกร้า =====
-  var TT_CART_URL = "https://vt.tiktok.com/ZSSH9A3F7";
+  // ===== 1) ตั้งค่าลิงก์ตะกร้าหรือหน้าสินค้า TikTok =====
+  var TT_TARGET_WEB = "https://vt.tiktok.com/ZSSH9A3F7"; // <- เปลี่ยนตรงนี้ได้
 
-  // ===== ตรวจแพลตฟอร์ม =====
+  // สร้าง deep link หลายรูปแบบ
+  var TT_SCHEME_1   = "tiktok://webview?url=" + encodeURIComponent(TT_TARGET_WEB);
+  var TT_SCHEME_2   = "tiktok://open?url="    + encodeURIComponent(TT_TARGET_WEB);
+  var ANDROID_INTENT = "intent://webview?url="+encodeURIComponent(TT_TARGET_WEB)
+                     + "#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;"
+                     + "S.browser_fallback_url="+encodeURIComponent(TT_TARGET_WEB)+";end";
+
+  // ===== 2) ตรวจแพลตฟอร์ม =====
   var ua = navigator.userAgent || "";
   var isAndroid = /Android/i.test(ua);
-  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isIOS     = /iPhone|iPad|iPod/i.test(ua);
 
-  // ===== สร้าง Deep Link ตามแพลตฟอร์ม =====
-  function buildDeepLink(){
-    if(isAndroid){
-      // พยายามเปิดผ่าน intent:// (เปิดแอปโดยตรงได้มากที่สุด) + fallback ในตัว
-      var fb = encodeURIComponent(TT_CART_URL);
-      return "intent://webview?url="+encodeURIComponent(TT_CART_URL)
-           + "#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;"
-           + "S.browser_fallback_url="+fb+";end";
-    } else if(isIOS){
-      // iOS ใช้ custom scheme
-      return "tiktok://webview?url="+encodeURIComponent(TT_CART_URL);
+  // ===== 3) ถ้าแอปเปิดสำเร็จ หน้าปัจจุบันจะถูกซ่อน → ยกเลิก fallback =====
+  var timers = [];
+  function cancelOnHide(){
+    function handler(){
+      if(document.hidden){
+        timers.forEach(function(id){ clearTimeout(id); });
+        document.removeEventListener('visibilitychange', handler);
+      }
     }
-    // Desktop/อื่น ๆ กลับไปเว็บ
-    return TT_CART_URL;
+    document.addEventListener('visibilitychange', handler);
   }
 
-  // ===== ยกเลิก fallback ถ้าสลับแอปได้จริง =====
-  function cancelOnHide(timer){
-    var onHide = function(){
-      if(document.hidden){ clearTimeout(timer); }
-    };
-    document.addEventListener('visibilitychange', onHide, { once:true });
-  }
-
-  // ===== เปิด TikTok แบบ “แรง” ตามข้อจำกัดของระบบ =====
-  function openTikTok(){
-    var deep = buildDeepLink();
+  // ===== 4) ลำดับความพยายาม “อัตโนมัติ” ทันทีที่เปิดหน้า =====
+  function autoOpen(){
+    cancelOnHide();
 
     if(isAndroid){
-      // แค่เปลี่ยน location ไป intent:// ก็พอ (มี fallback ในตัว)
-      location.href = deep;
+      // Android: ยิง intent:// ก่อน (มี fallback ในตัวหลายรุ่น)
+      location.href = ANDROID_INTENT;
+
+      // ลองซ้ำด้วย scheme เผื่อบางเครื่องไม่รองรับ intent
+      timers.push(setTimeout(function(){ location.href = TT_SCHEME_1; }, 180));
+      timers.push(setTimeout(function(){ location.href = TT_SCHEME_2; }, 360));
+
+      // สุดท้าย fallback ไปเว็บถ้าไม่สลับแอปภายใน ~1.2s
+      timers.push(setTimeout(function(){ location.href = TT_TARGET_WEB; }, 1200));
       return;
     }
 
     if(isIOS){
-      // iOS: ใช้ hidden iframe จะเปิด scheme ได้เสถียรกว่าบางเคส
-      var iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = deep;
-      document.body.appendChild(iframe);
+      // iOS: บางเคสต้องยิงหลายวิธีติด ๆ กัน
+      // 1) ยิงผ่าน location.href
+      location.href = TT_SCHEME_1;
 
-      // ตั้ง fallback หากไม่สลับแอปภายใน 1.2s
-      var timer = setTimeout(function(){ location.href = TT_CART_URL; }, 1200);
-      cancelOnHide(timer);
+      // 2) ยิงผ่าน hidden iframe (หลายเคสเวิร์กกว่า)
+      timers.push(setTimeout(function(){
+        try{
+          var iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = TT_SCHEME_2;
+          document.body.appendChild(iframe);
+        }catch(e){}
+      }, 150));
+
+      // 3) ยิงซ้ำอีกครั้งด้วย scheme หลัก
+      timers.push(setTimeout(function(){ location.href = TT_SCHEME_1; }, 300));
+
+      // 4) fallback ไปเว็บถ้าไม่สลับแอปภายใน ~1.2s
+      timers.push(setTimeout(function(){ location.href = TT_TARGET_WEB; }, 1200));
       return;
     }
 
-    // อื่น ๆ: ไปเว็บ
-    location.href = TT_CART_URL;
+    // Desktop/อื่น ๆ → ไปเว็บ
+    location.href = TT_TARGET_WEB;
   }
 
-  // ===== ปุ่มให้ผู้ใช้กด (เพิ่มโอกาสผ่านตัวบล็อก) =====
-  var btn = document.getElementById('openBtn');
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    openTikTok();
-  });
-
-  // ===== สำรอง: บางเบราว์เซอร์ยอม auto หลังโหลด (คอมเมนต์ไว้เพื่อลดการโดนบล็อก) =====
-  // setTimeout(openTikTok, 200);
+  // เริ่มทำงานอัตโนมัติทันที
+  // ใช้ setTimeout สั้น ๆ เพื่อให้ DOM พร้อมและบางเบราว์เซอร์ยอม redirect
+  setTimeout(autoOpen, 50);
 })();
 </script>
 </body>
